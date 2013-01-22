@@ -11,7 +11,7 @@
   <script src="ng-tree-btn.js"></script>
   <meta charset=utf-8 />
   <style type="text/css">
-    .demo { padding: 10px; }
+    .demo { padding: 20px; }
   </style>
   <style type="text/css">
     .block { display: block; }
@@ -116,22 +116,9 @@ var myCtrl = function ($scope) {
 </script>
 
 <div ng-app="demoApp" ng-controller="myCtrl">
-  <div class="btn-toolbar demo" ng-app="demoApp" ng-controller="myCtrl">
-    <!--div class="btn-group pull-left">
-      <div ng-tree-btn="rooms" label="{{label}} "
-           btncls="w190" callback="populateDropdown(res)"></div>
-    </div>
-    <div class="btn-group pull-left">
-      <div ng-tree-btn="rooms" label="{{btn.label}}" is-enabled="{{btn.chk}}"
-           btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
-    </div>
-
-    <div class="btn-group pull-left">
-      <div ng-tree-btn="guests" label="Please select guest "
-           btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
-    </div-->
-    <div ng-repeat="btn in btns">
-      <div class="btn-group pull-left">
+  <div class="btn-toolbar" ng-app="demoApp" ng-controller="myCtrl">
+    <div ng-repeat="btn in btns" class="pull-left demo">
+      <div class="btn-group">
         <div ng-tree-btn="btn.items" label="{{btn.label}}" is-enabled="isOn(btn)"
              btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
       </div>
