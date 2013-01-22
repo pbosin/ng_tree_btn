@@ -1,0 +1,36 @@
+<!-- Multi select with tree and Confirm btn -->
+<div class="btn-group">
+  <button class="btn {{btnCls}} dropdown-toggle" ng-class="{disabled: !isEnabled()}"
+          ng-click="toggleDrop()">{{label}} <b class="caret"></b>
+  </button>
+  <ul class="dropdown-menu block" ng-show="opened">
+    <li>
+      <a class="multiAll" href="#" ng-click="selectItem(options)">All 
+        <span class="icon-ok" ng-show="checked(options)"></span>
+      </a>
+      <ul class="menu">
+        <li ng-repeat="item in options.items">
+          <a ng-show="!hasChildren(item)"
+             class="multicheck" href="#" ng-click="selectItem(item)">{{item.name}}
+            <span class="icon-ok" ng-show="checked(item)"></span>
+          </a>
+          <a ng-show="hasChildren(item)" class="multiAll" href="#"
+             ng-click="selectItem(item)">{{item.name}}
+            <span class="icon-ok" ng-show="checked(item)"></span>
+          </a>
+          <ul ng-show="hasChildren(item)" class="menu">
+            <li ng-repeat="option in item.items">
+              <a class="multicheck" href="#" ng-click="selectItem(option)">{{option.name}}
+                <span class="icon-ok" ng-show="checked(option)"></span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="centered">
+      <button class="btn btn-mini btn-info saveMultiAll" ng-click="confirmMulti($event)">Confirm</button>
+    </li>
+    <div class="clearfix"></div>
+  </ul>
+</div>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ng-drop-btn Demo</title>
+  <link href="bootstrap.css" rel="stylesheet" type="text/css" />
+  <!--link href="css/app.css" rel="stylesheet" type="text/css" /-->
+  <script src="../js/jquery-1.8.2.min.js"></script>
+  <!--script src="http://code.jquery.com/jquery.min.js"></script-->
+  <script src="../js/bootstrap.js"></script>
+  <script src="angular.js"></script>
+  <script src="ng-tree-btn.js"></script>
+  <meta charset=utf-8 />
+  <style type="text/css">
+    .demo { padding: 10px; }
+  </style>
+  <style type="text/css">
+    .block { display: block; }
+    .centered { text-align:center; }
+    ul.menu { margin-left:15px }
+    .menu li { list-style-type:none; }
+    .dropdown-menu li > a.multicheck { padding: 3px 10px }
+    .saveMultiAll {
+      margin: 2px auto;
+      width: 90%;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+
+angular.module('demoApp', ['pbComponents']);
+
+var myCtrl = function ($scope) {
+  $scope.rooms = {
+          "items": [
+              {"id":"1","name": "Room 1"},
+              {"id":"2","name": "Room 2", "checked":true},
+              {"id":"3","name": "Room 3", "checked":true},
+              {"id":"4","name": "Room 4"}
+           ]
+      };
+  $scope.guests = {
+          items: [
+              {
+                "name": "Room 1",
+                "items": [
+                    {"id":"g11","name": "Guest 11"},
+                    {"id":"g12","name": "Guest 12", "checked": true }
+                ]
+              },
+              {
+                "name": "Room 2",
+                "items": [
+                    {"id":"g21","name": "Guest 21"},
+                    {"id":"g22","name": "Guest 22"}
+                ]
+              }
+          ]
+      };
+
+  function findRoomById(id) {
+    var i, options = $scope.rooms.items;
+    for (i in options) {
+      if (options[i].id == id) {
+        return options[i];
+      }
+    }
+    return null;
+  }
+  $scope.populateDropdown = function (res) {
+    var id, room, s = "";
+    for (id in res) {
+      if (res[id]){
+        room = findRoomById(id);
+        if (room != null) {
+          s += room.name + ", ";
+        }
+      }
+    }
+    if (s.length > 19) {
+      $scope.label = s.substring(0,17)+"...";
+    } else if (s.length > 2) {
+      $scope.label = s.substring(0, s.length - 2);
+    }
+  }
+
+  $scope.processRes = function (res) {
+      var prop;
+      if (typeof(res) === "string") {
+        alert(res);
+      } else {
+        var s = "";
+        for(prop in res){
+          s += prop + ":" + res[prop] + ",";
+        }
+        alert(s);
+      }
+  };
+
+  $scope.btns = [
+    {
+      "label":"Drop Button",
+      "chk":true,
+      "items": $scope.rooms
+    },
+    {
+      "label":"Drop Button 2",
+      "chk":true,
+      "items": $scope.guests
+    }
+  ];
+  $scope.isOn = function (btn) {
+    return btn.chk;
+  };
+}
+</script>
+
+<div ng-app="demoApp" ng-controller="myCtrl">
+  <div class="btn-toolbar demo" ng-app="demoApp" ng-controller="myCtrl">
+    <!--div class="btn-group pull-left">
+      <div ng-tree-btn="rooms" label="{{label}} "
+           btncls="w190" callback="populateDropdown(res)"></div>
+    </div>
+    <div class="btn-group pull-left">
+      <div ng-tree-btn="rooms" label="{{btn.label}}" is-enabled="{{btn.chk}}"
+           btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
+    </div>
+
+    <div class="btn-group pull-left">
+      <div ng-tree-btn="guests" label="Please select guest "
+           btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
+    </div-->
+    <div ng-repeat="btn in btns">
+      <div class="btn-group pull-left">
+        <div ng-tree-btn="btn.items" label="{{btn.label}}" is-enabled="isOn(btn)"
+             btncls="btn-mini w140 btn-success" callback="processRes(res)"></div>
+      </div>
+      <input type="checkbox" ng-model="btn.chk"> Enabled: {{btn.chk}}
+    </div>
+  </div>
+  <!--input type="checkbox" ng-model="btn.chk"> Enable {{btn.chk}} -->
+</div>
+
+</body>
+</html>
