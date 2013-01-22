@@ -1,0 +1,19 @@
+.block {
+  display: block;
+}
+.centered {
+  text-align:center;
+}
+ul.menu {
+  margin-left:15px
+}
+.menu li {
+  list-style-type:none;
+}
+.dropdown-menu li > a.multicheck {
+  padding: 3px 10px
+}
+.saveMultiAll {
+  margin: 2px auto;
+  width: 90%;
+}
