@@ -15,3 +15,7 @@ parameters:
      *     example of result argument passed to callback: {"123":true,"763":false,"2":true}
      *     this function is called when user clicks on "Confirm" button within the drop-down.
      * @param enabled - function used to determine enabled/disabled state
+
+TODO:
+- move css from demo index.html to ng-tree-btn.css
+- add tests!
