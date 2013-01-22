@@ -19,3 +19,6 @@ parameters:
 TODO:
 - move css from demo index.html to ng-tree-btn.css
 - add tests!
+
+Demo:
+    http://www.bosin.net/ng/index.html
