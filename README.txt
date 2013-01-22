@@ -17,7 +17,6 @@ parameters:
      * @param enabled - function used to determine enabled/disabled state
 
 TODO:
-- move css from demo index.html to ng-tree-btn.css
 - add tests!
 
 Demo:
